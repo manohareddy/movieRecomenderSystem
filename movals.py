@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import Row
 from pyspark.sql.types import *
 from pyspark.mllib.recommendation import ALS
+from pyspark import SparkConf
 import math
 import json
 
@@ -9,6 +10,15 @@ spark = SparkSession \
         .builder \
         .appName("movievals") \
         .getOrCreate()
+        
+conf = SparkConf()
+
+conf.setMaster('give the spark cluster path here')\
+    .setAppName('test')\
+    .set("spark.executor.memory", '8g')\
+    .set('spark.executor.cores', '160')\
+    .set('spark.cores.max', '160')\
+    .set("spark.driver.memory",'8g')        
    
 sc = spark.sparkContext
 
